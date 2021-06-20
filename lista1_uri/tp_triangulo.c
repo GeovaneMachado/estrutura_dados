@@ -1,7 +1,8 @@
 #include<stdio.h>
+
 int main()
 {
-    float A, B, C;
-    
+    double A, B, C;
+    scanf("%lf %lf %lf", &A,&B, &C);    
     return 0;
 }
