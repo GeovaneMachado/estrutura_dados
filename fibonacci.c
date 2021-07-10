@@ -2,14 +2,15 @@
 
 int main()
 {
-    int num, i = 0, soma;
+    int num, i = 0, soma, seq;
+    scanf("%i", &num);
     printf("%i\t", i);
-    i = 1;
     while (i < num)
     {
-        i = i + (i -1);
-        printf("%i\t", i);
-
+        soma = i;
+        printf("%i\t%i\t", soma,i);
+        i++;
+        seq = i + soma;
     }
     
     return 0;
