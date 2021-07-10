@@ -2,16 +2,23 @@
 
 int main()
 {
-    int num, i = 0, soma, seq;
+    int num, i = 0, soma, seq1 = -1, seq2 = 1;
     scanf("%i", &num);
-    printf("%i\t", i);
-    while (i < num)
+    while (i< num)
     {
-        soma = i;
-        printf("%i\t%i\t", soma,i);
+        soma = seq2 + seq1;
+        seq1 = seq2;
+        seq2 = soma;
         i++;
-        seq = i + soma;
+        printf("%i",soma);
+        if(i<num)
+        {
+            printf(" ");
+        }
+        else
+        {
+            printf("\n");
+        }
     }
-    
     return 0;
 }
