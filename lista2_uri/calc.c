@@ -4,7 +4,7 @@
 int main()
 {
     int N, i;
-    char valores[14], numero1[3], numero2[4], numero3[3] ;
+    char valores[14], numero1[3], numero2[4], numero3[3];
     scanf("%i", &N);
     int sum[N];
     for(i = 0; i < N; i++)
