@@ -8,11 +8,13 @@ struct Complexo
 typedef struct Complexo complexo;
 
 //recebe 3 parametros, um ponteiro e dois doubles
-void criaComplexo(complexo *cp, double r, double imag) 
+complexo criaComplexo(double r, double imag) 
 {
      //Atribui os valores da struct para o ponteiro retornando os valores diretos
-    cp->real = r;              
-    cp->imaginario = imag;        
+    complexo ok;
+    ok.real = r;              
+    ok.imaginario = imag;    
+    return ok;
 }
 void somaComplexos(complexo *soma, complexo valor1, complexo valor2)
 {
@@ -35,11 +37,11 @@ int main()
 {
     //declarando variaveis e ponteiros
     double a=10, b=20;
-    complexo *cp, *soma, valor1, valor2;
+    complexo cp, *soma, valor1, valor2;
     //chamando a função criaComplexo e imprimindo ela
-    criaComplexo(&cp, a, b);
+    cp = criaComplexo(a, b);
     printf("****Cria complexo****\n");
-    printf("real: %.2lf\nImaginario: %.2lf\n", cp);
+    printf("real: %.2lf\nImaginario: %.2lf\n", cp.real, cp.imaginario);
     //obtendo os valores para aplicar na função somaComplexo
     printf("****Soma complexos****\n");
     printf("Digite primeiro o valor real e depois o valor imaginario: ");
