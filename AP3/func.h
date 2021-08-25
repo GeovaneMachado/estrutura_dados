@@ -19,8 +19,6 @@ typedef struct //struct da ficha do aluno
 
 int menu(int opc) //Menu do programa
 {
-    printf("\n*****MENU*****");
-    printf("\n[0] Sair\n[1] Adicinar\n[2] Excluir\n[3] Listar em ordem\n[4]Listar ordem inversa\n[5] Contar elementos\n");
     scanf("%i", &opc);
     return opc; //retorna a opcao desejada 
 }
@@ -91,11 +89,9 @@ void print_Student(student *people) //Emprime os estudantes cadastrados
         student *i;
         for(i=people;i!=NULL;i=i->next)
         {
-            printf("\n-------------------------------");
-            printf("\nRegistration: %s\nName: %s", i->resgitration, i->name);
-            printf("\nNascimento: %i/%i/%i", i->birth.day, i->birth.moth, i->birth.year);
-            printf("\nAverage: %.f", i->average);
-            printf("\n-------------------------------");
+            printf(" %s, %s", i->resgitration, i->name);
+            printf(", %i/%i/%i", i->birth.day, i->birth.moth, i->birth.year);
+            printf(", %.f", i->average);
         }    
     }
 }
@@ -106,11 +102,9 @@ void print_reverse(student *first) //Impime a lista em ordem inversa
     else
     {
         print_reverse(first->next); //aponta para o proximo elemento da lista
-        printf("\n-------------------------------");
-        printf("\nRegistration: %s\nName: %s", first->resgitration, first->name);
-        printf("\nNascimento: %i/%i/%i", first->birth.day, first->birth.moth, first->birth.year);
-        printf("\nAverage: %.f", first->average);
-        printf("\n-------------------------------\n");        
+        printf(", %s, %s", first->resgitration, first->name);
+        printf(", %i/%i/%i", first->birth.day, first->birth.moth, first->birth.year);
+        printf(", %.f", first->average);     
     }//apos final que ira retorna o print de forma inversa
 }
 

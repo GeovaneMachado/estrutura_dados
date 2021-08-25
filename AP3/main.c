@@ -15,16 +15,11 @@ int main()
         {
             case 1: //Adicionar elementos a lista
                 people = (student *)malloc(sizeof(student));//aloca a memoria
-                printf("matricula");
                 scanf("%s", resg);
-                printf("Nome");
                 scanf("%s", name);
                 strcpy(people->resgitration, resg);
                 strcpy(people->name, name);
-                printf("Nascimento: ");
                 scanf("%i/%i/%i", &people->birth.day, &people->birth.moth, &people->birth.year);
-                people->average = 7.3;
-                printf("Media: ");
                 scanf("%f", &people->average);
                 people->next = NULL;
                 if(first == NULL) //Se first == NULL first e assistant ira apontar pra people
@@ -58,7 +53,7 @@ int main()
                 break;
             case 5:
                 cont = count_student(first);
-                printf("\n%i", cont);
+                printf("%i", cont);
                 break;
             default: 
                 stop = 0;
