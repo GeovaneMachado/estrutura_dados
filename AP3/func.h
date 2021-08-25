@@ -34,41 +34,53 @@ int Void(student *list) //Verefica se a lista é vazia
 
 student *Delete(student *first)//Deleta um elemento na lista
 {
-    student *assistant, *previous, *nulo= NULL;
+    student *assistant, *previous;
     int confere, cont;
     char delete_reg[TAM_REG]; 
     scanf("%s", delete_reg); //Le o elemento para deletar
-    for(assistant=first; assistant != NULL; assistant = assistant->next)//for para percorrer a lista
+    if(Void(first))
     {
-        confere =strcmp(delete_reg, assistant->resgitration); //Compara os valores, se for 0 sao iguais
-        if(confere == 0) //Verifica se os elementos sao iguais
+        printf("Lista vazia!"); //Verefica se a lista é vazia
+        return NULL;
+    }
+    else
+    {
+        for(assistant=first; assistant != NULL; assistant = assistant->next)//for para percorrer a lista
         {
-            confere = 1;
-            if (assistant == first)//Verifica se assistant e igual a first 
+            confere =strcmp(delete_reg, assistant->resgitration); //Compara os valores, se for 0 sao iguais
+            if(confere == 0) //Verifica se os elementos sao iguais
             {
-                first = first->next; // first aponta para proximo se forem iguais
-                free(assistant);
-                cont = count_student(first);
-                if(cont == 0) return nulo;
-                return first;
-            }
-            else 
-            {
-                for(previous=first;previous!=NULL; previous=previous->next) //For para comparar qual é igual depois do primeiro e deletar
+                confere = 1;
+                if (assistant == first)//Verifica se assistant e igual a first 
                 {
-                    if(previous->next == assistant) //Verifica se o proximo de previous é igual a assistant
+                    if(first->next == NULL)
                     {
-                        previous->next = assistant->next; //o proximo de previous recebe o proximo de assistant
-                        free(assistant);//Deleta elemento da lista
-                        cont = count_student(first);
-                        if(cont == 0) return nulo;
+                        //free(assistant);
+                        return NULL;
+                    }
+                    else
+                    {
+                        first = first->next; // first aponta para proximo se forem iguais
+                        free(assistant);
                         return first;
                     }
                 }
-            }
-        }   
+                else 
+                {
+                    for(previous=first;previous!=NULL; previous=previous->next) //For para comparar qual é igual depois do primeiro e deletar
+                    {
+                        if(previous->next == assistant) //Verifica se o proximo de previous é igual a assistant
+                        {
+                            previous->next = assistant->next; //o proximo de previous recebe o proximo de assistant
+                            free(assistant);//Deleta elemento da lista
+                            return first;
+                        }
+                    }
+                }
+            }   
+        }
+        if(confere != 0) return first;     
     }
-    if(confere != 0) return first;     
 }
 
 void print_Student(student *people) //Emprime os estudantes cadastrados
@@ -107,17 +119,18 @@ int count_student(student *first) //Conta quantos cadastros tem na lista
 {
         student *i;
         int count=0;
-        for(i=first;i!=NULL;i=i->next) count++; // percorre a lista e faz o acrescimo em 1 na variavel count
+        for(i=first;i!=NULL;i=i->next) count++; // percorre a lista e faz o acrescimo de 1 na variavel count
         return count; //Retorna a contagem
 }
 
-void freeMemory(student *first)
+void freeMemory(student *first) //Libera o espaço na memoria
 {
-    student *previous=first, *assistant;
-    for(assistant=first->next;assistant!=NULL;assistant =assistant->next)
+    student *previous=first, *assistant; //Variavel previous aponta para first
+    while(previous !=NULL) //While que ira caminha o previous 
     {
-        free(previous);
-        printf('-');
-        previous = assistant;
+        printf("-");
+        assistant = previous->next; //assistant aponta para o proximo de previous
+        free(previous); //previous é apagado
+        previous = assistant; //previous aponta para o proximo da lista
     }
 }

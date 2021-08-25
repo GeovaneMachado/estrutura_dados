@@ -13,9 +13,6 @@ int main()
         opc = menu(opc);
         switch (opc)
         {
-            case 0:
-                stop = 0;
-                break;
             case 1: //Adicionar elementos a lista
                 people = (student *)malloc(sizeof(student));//aloca a memoria
                 printf("matricula");
@@ -42,16 +39,15 @@ int main()
                 }
                 break;
             case 2: //Deletar elementos
-                if(Void(first))printf("Lista vazia!"); //Verefica se a lista é vazia
-                else
-                {
                     first = Delete(first); //Funcao para deletar o elemento se a lista nao for vazia
                     assistant = first; //assistant aponta para o primeiro elemento da lista
-                    while (assistant->next != NULL)
+                    if(first !=NULL)
                     {
-                        assistant = assistant->next; //atualiza o valor de assistant
-                    }
-                }
+                        while (assistant->next != NULL)
+                        {
+                            assistant = assistant->next; //atualiza o valor de assistant
+                        }
+                    }                
                 break;
             case 3:    
                 print_Student(first); //Imprime os estudantes na ordem de inclusao
@@ -65,10 +61,11 @@ int main()
                 printf("\n%i", cont);
                 break;
             default: 
-               // stop = 0;
+                stop = 0;
                 break;
         }
     }
-    freeMemory(first);
+    freeMemory(first); //Libera a memoria
+    print_Student(first);
     return 0;
 }
