@@ -17,12 +17,6 @@ typedef struct //struct da ficha do aluno
     struct student *next; // proximo aluno
 }student;
 
-int menu(int opc) //Menu do programa
-{
-    scanf("%i", &opc);
-    return opc; //retorna a opcao desejada 
-}
-
 
 int Void(student *list) //Verefica se a lista é vazia
 {
@@ -89,9 +83,9 @@ void print_Student(student *people) //Emprime os estudantes cadastrados
         student *i;
         for(i=people;i!=NULL;i=i->next)
         {
-            printf(" %s, %s", i->resgitration, i->name);
+            printf("%s, %s", i->resgitration, i->name);
             printf(", %i/%i/%i", i->birth.day, i->birth.moth, i->birth.year);
-            printf(", %.f", i->average);
+            printf(", %.2f\n", i->average);
         }    
     }
 }
@@ -102,9 +96,9 @@ void print_reverse(student *first) //Impime a lista em ordem inversa
     else
     {
         print_reverse(first->next); //aponta para o proximo elemento da lista
-        printf(", %s, %s", first->resgitration, first->name);
+        printf("%s, %s", first->resgitration, first->name);
         printf(", %i/%i/%i", first->birth.day, first->birth.moth, first->birth.year);
-        printf(", %.f", first->average);     
+        printf(", %.2f\n", first->average);     
     }//apos final que ira retorna o print de forma inversa
 }
 
@@ -122,9 +116,9 @@ void freeMemory(student *first) //Libera o espaço na memoria
     student *previous=first, *assistant; //Variavel previous aponta para first
     while(previous !=NULL) //While que ira caminha o previous 
     {
-        printf("-");
         assistant = previous->next; //assistant aponta para o proximo de previous
         free(previous); //previous é apagado
         previous = assistant; //previous aponta para o proximo da lista
+        printf("-");
     }
 }

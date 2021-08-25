@@ -5,21 +5,19 @@
 
 int main()
 {
-    student *people , *assistant, *first=NULL, *previous=first, *i;;
+    student *people , *assistant, *first=NULL, *previous=first, *i;
     char resg[TAM_REG], name[TAM_NAME];
     int opc, stop = 1, cont;
     while (stop !=0)
     {    
-        opc = menu(opc);
+        scanf("%i", &opc);
         switch (opc)
         {
             case 1: //Adicionar elementos a lista
                 people = (student *)malloc(sizeof(student));//aloca a memoria
-                scanf("%s", resg);
-                scanf("%s", name);
-                strcpy(people->resgitration, resg);
-                strcpy(people->name, name);
-                scanf("%i/%i/%i", &people->birth.day, &people->birth.moth, &people->birth.year);
+                scanf("%s", people->resgitration);
+                scanf("%s", people->name);
+                scanf("%d/%d/%d", &people->birth.day, &people->birth.moth, &people->birth.year);
                 scanf("%f", &people->average);
                 people->next = NULL;
                 if(first == NULL) //Se first == NULL first e assistant ira apontar pra people
