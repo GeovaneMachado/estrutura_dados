@@ -6,43 +6,61 @@
 int main()
 {
     student *people , *assistant, *first=NULL;
-    int opc=1;
+    char resg[TAM_REG], name[TAM_NAME];
+    int opc=1, cont;
     while (opc!=0)
     {    
         opc = menu(opc);
         switch (opc)
         {
-        case 1:
+        case 1: //Adicionar elementos a lista
             people = (student *)malloc(sizeof(student));//aloca a memoria
-            strcpy(people->resgitration, "1234");
-            strcpy(people->name, "geovane");
+            printf("matricula");
+            scanf("%s", resg);
+            printf("Nome");
+            scanf("%s", name);
+            strcpy(people->resgitration, resg);
+            strcpy(people->name, name);
             printf("Nascimento: ");
             scanf("%i/%i/%i", &people->birth.day, &people->birth.moth, &people->birth.year);
             people->average = 7.3;
-            /*printf("Media: ");
-            scanf("%f", &people->average);*/
+            printf("Media: ");
+            scanf("%f", &people->average);
             people->next = NULL;
-            if(first == NULL)
+            if(first == NULL) //Se first == NULL first e assistant ira apontar pra people
             {
                 first = people;
                 assistant =people;    
             }
-            else
+            else //Assistant->next aponta para people e depois recebe os dados
             {
-                /*assistant = first;
-                while (assistant->next =NULL)
-                {
-                    assistant = assistant->next;
-                }    */
                 assistant->next = people;
                 assistant = people; 
             }
-            break;    
+            break;
+        case 2: //Deletar elementos
+            if(Void(first))printf("Lista vazia!"); //Verefica se a lista é vazia
+            else
+            {
+                first = Delete(first); //Funcao para deletar o elemento se a lista nao for vazia
+                assistant = first; //assistant aponta para o primeiro elemento da lista
+                while (assistant->next != NULL)
+                {
+                    assistant = assistant->next; //atualiza o valor de assistant
+                }
+            }
+            break;
+        case 3:    
+            print_Student(first);
+            break;
+        case 4:
+            cont = count_student(first);
+            printf("\n%i", cont);
+            break;
         default:
-            opc = 0;
+            //opc = 0;
             break;
         }
-        print_Student(people);
     }
     return 0;
 }

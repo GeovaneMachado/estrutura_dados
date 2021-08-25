@@ -13,8 +13,8 @@ typedef struct //struct da data de nascimento do aluno
 
 typedef struct //struct da ficha do aluno
 {
-    char resgitration[TAM_REG+1]; //matricula
-    char name[TAM_NAME+1];//nome
+    char resgitration[TAM_REG]; //matricula
+    char name[TAM_NAME];//nome
     Date birth;//nascimento
     float average;//media das notas
     struct student *next; // proximo aluno
@@ -22,15 +22,26 @@ typedef struct //struct da ficha do aluno
 
 void print_Student(student *people) //Emprime os estudantes cadastrados
 {
-    student *i;
-    for(i=people;i!=NULL;i=i->next)
+    if(Void(people)) printf("Lista vazia!");
+    else
     {
-        printf("\n-------------------------------");
-        printf("\nRegistration: %s\nName: %s", i->resgitration, i->name);
-        printf("\nNascimento: %i/%i/%i", i->birth.day, i->birth.moth, i->birth.year);
-        printf("\nAverage: %.f", i->average);
-        printf("\n-------------------------------");
+        student *i;
+        for(i=people;i!=NULL;i=i->next)
+        {
+            printf("\n-------------------------------");
+            printf("\nRegistration: %s\nName: %s", i->resgitration, i->name);
+            printf("\nNascimento: %i/%i/%i", i->birth.day, i->birth.moth, i->birth.year);
+            printf("\nAverage: %.f", i->average);
+            printf("\n-------------------------------");
+        }    
     }
+}
+int count_student(student *first)
+{
+        student *i;
+        int count=0;
+        for(i=first;i!=NULL;i=i->next) count++;
+        return count;
 }
 
 int Void(student *list)
@@ -39,39 +50,49 @@ int Void(student *list)
     else return 1;
 }
 
-/*student *pupil(student *name_student)
+student *Delete(student *first)//Deleta um elemento na lista
 {
-    student *assistant, *first;
-    if(name_student == NULL) first =NULL;
-    name_student = (student *)malloc(sizeof(student));//aloca a memoria
-    strcpy(name_student->resgitration, "1234");
-    strcpy(name_student->name, "geovane");
-    printf("Nascimento: ");
-    scanf("%i/%i/%i", &name_student->birth.day, &name_student->birth.moth, &name_student->birth.year);
-    name_student->average = 7.3;
-    /*printf("Media: ");
-    scanf("%f", &name_student->average);*//*
-    name_student->next = NULL;
-    if(first == NULL)
+    student *assistant, *previous, *nulo= NULL;
+    int confere, cont;
+    char delete_reg[TAM_REG]; 
+    scanf("%s", delete_reg); //Le o elemento para deletar
+    for(assistant=first; assistant != NULL; assistant = assistant->next)//for para percorrer a lista
     {
-        first = name_student;
+        confere =strcmp(delete_reg, assistant->resgitration); //Compara os valores, se for 0 sao iguais
+        if(confere == 0) //Verifica se os elementos sao iguais
+        {
+            confere = 1;
+            if (assistant == first)//Verifica se assistant e igual a first 
+            {
+                first = first->next; // first aponta para proximo se forem iguais
+                free(assistant);
+                cont = count_student(first);
+                if(cont == 0) return nulo;
+                return first;
+            }
+            else 
+            {
+                for(previous=first;previous!=NULL; previous=previous->next) //For para comparar qual é igual depois do primeiro e deletar
+                {
+                    if(previous->next == assistant)
+                    {
+                        previous->next = assistant->next;
+                        free(assistant);//Deleta elemento da lista
+                        cont = count_student(first);
+                        if(cont == 0) return nulo;
+                        return first;
+                    }
+                }
+            }
+        }   
     }
-    else
-    {
-       //assistant = first;
-      //  while(assistant->next!=NULL)
-           // assistant = assistant->next;       
-        assistant->next= name_student;
-        assistant = name_student;   
-    }      
-    return name_student;    
-}*/
+    if(confere != 0) return first;     
+}
 
 int menu(int opc)
 {
-    printf("\nOPCAO\n[1] Adicinar\n [2] Excluir\n[3] Listar\n");
-    //scanf("%i", &opc);
-    opc = 1;
+    printf("\nOPCAO\n[1] Adicinar\n [2] Excluir\n[3] Listar\n[4] Contar elementos\n");
+    scanf("%i", &opc);
     return opc;
 }
 
