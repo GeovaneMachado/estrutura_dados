@@ -66,6 +66,5 @@ int main()
         }
     }
     freeMemory(first); //Libera a memoria
-    print_Student(first);
     return 0;
 }
