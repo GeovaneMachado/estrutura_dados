@@ -32,7 +32,7 @@ student *Delete(student *first)//Deleta um elemento na lista
     scanf("%s", delete_reg); //Le o elemento para deletar
     if(Void(first))
     {
-        printf("Lista vazia!\n"); //Verefica se a lista é vazia
+        printf("Lista vazia!"); //Verefica se a lista é vazia
         return NULL;
     }
     else
@@ -77,7 +77,7 @@ student *Delete(student *first)//Deleta um elemento na lista
 
 void print_Student(student *people) //Emprime os estudantes cadastrados
 {
-    if(Void(people)) printf("Lista vazia!\n");
+    if(Void(people)) printf("Lista vazia!");
     else
     {
         student *i;
@@ -121,7 +121,4 @@ void freeMemory(student *first) //Libera o espaço na memoria
         previous = assistant; //previous aponta para o proximo da lista
         printf("-");
     }
-    printf("\n");
 }
-
-

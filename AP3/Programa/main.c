@@ -46,12 +46,12 @@ int main()
                 print_Student(first); //Imprime os estudantes na ordem de inclusao
                 break;
             case 4:
-                if(Void(first))printf("Lista vazia!\n");
+                if(Void(first))printf("Lista vazia!");
                 else print_reverse(first); //Imprime os estudantes na ordem reversa de inclusao
                 break;
             case 5:
                 cont = count_student(first);
-                printf("%i\n", cont);
+                printf("%i", cont);
                 break;
             default: 
                 stop = 0;
