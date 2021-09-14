@@ -65,8 +65,8 @@ int main()
                 else
                 {
                     aux = people;
-                    people->previous = aux;
-                    aux->next = people;
+                    people->previous = taill;
+                    taill->next = people;
                     taill = people;
                 }
                 break;
