@@ -41,10 +41,20 @@ student *cria_aluno(student *people)
     people->previous = NULL;
     return people;
 }
+void print_student(student *people)
+{
+    student *i;
+    for(i=people; i!=NULL; i=i->next)
+    {
+        printf("%s, %s", i->resgitration, i->name);
+        printf(", %i/%i/%i", i->birth.day, i->birth.moth, i->birth.year);
+        printf(", %.2f\n", i->average);
+    }
+}
 
 int main()
 {
-    student *people, *aux;
+    student *people;// *aux;
     head = NULL;
     taill = NULL;
     int op;
@@ -64,14 +74,14 @@ int main()
                 }
                 else
                 {
-                    aux = people;
+                   // aux = people;
                     people->previous = taill;
                     taill->next = people;
                     taill = people;
                 }
                 break;
             case 2:
-               // print_Student(people);
+                print_student(people);
                 break;
             default:
                 break;
