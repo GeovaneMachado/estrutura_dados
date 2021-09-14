@@ -48,27 +48,6 @@ student *cria_aluno(student *people) //Cria um elemento para adicionar na lista
     return people;
 }
 
-void print_student_first(body corp) //Imprime os estudantes na lista 
-{
-    student *i;
-    for(i= corp.head; i!=NULL; i=i->next)
-    {
-        printf("%s, %s", i->resgitration, i->name);
-        printf(", %i/%i/%i", i->birth.day, i->birth.moth, i->birth.year);
-        printf(", %.2f\n", i->average);
-    }
-}
-
-void print_student_end(body corp) //Imprime os estudantes na lista 
-{
-    student *i;
-    for(i= corp.taill; i!=NULL; i=i->previous)
-    {
-        printf("%s, %s", i->resgitration, i->name);
-        printf(", %i/%i/%i", i->birth.day, i->birth.moth, i->birth.year);
-        printf(", %.2f\n", i->average);
-    }
-}
 
 body lugar_elemento(body list) //Enserir um elemento na lista fazer a busca e enserir na ordem
 {    
@@ -119,10 +98,55 @@ body lugar_elemento(body list) //Enserir um elemento na lista fazer a busca e en
     return corp;
 }
 
+int Vazio(body aux)
+{
+    if(aux.head == NULL && aux.taill == NULL) return 1;
+    else return 0;
+}
+
+void excluir(body aux)
+{
+    if(Vazio(aux))
+    {
+        printf("Lista vazia!");
+        return;
+    } 
+}
+
+void print_student_first(body corp) //Imprime os estudantes na lista 
+{
+    if(Vazio(corp))
+    {
+        printf("Lista vazia!");
+        return;
+    } 
+    student *i;
+    for(i= corp.head; i!=NULL; i=i->next)
+    {
+        printf("%s, %s", i->resgitration, i->name);
+        printf(", %i/%i/%i", i->birth.day, i->birth.moth, i->birth.year);
+        printf(", %.2f\n", i->average);
+    }
+}
+
+void print_student_end(body corp) //Imprime os estudantes na lista 
+{
+    if(Vazio(corp))
+    {
+        printf("Lista vazia!");
+        return;
+    } 
+    student *i;
+    for(i= corp.taill; i!=NULL; i=i->previous)
+    {
+        printf("%s, %s", i->resgitration, i->name);
+        printf(", %i/%i/%i", i->birth.day, i->birth.moth, i->birth.year);
+        printf(", %.2f\n", i->average);
+    }
+}
 
 int main()
 {
-    student *people;
     body aux;
     aux.head =NULL;
     aux.taill = NULL;
@@ -135,6 +159,9 @@ int main()
         {
             case 1:
                 aux = lugar_elemento(aux); //Cria o elemento na lista e insere na ordem;
+                break;
+            case 2:
+                excluir(aux);
                 break;
             case 3:
                 print_student_first(aux); //Imprime na ordem o estudante a partir do primeiro
