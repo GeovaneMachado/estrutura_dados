@@ -48,10 +48,21 @@ student *cria_aluno(student *people) //Cria um elemento para adicionar na lista
     return people;
 }
 
-void print_student(body corp) //Imprime os estudantes na lista 
+void print_student_first(body corp) //Imprime os estudantes na lista 
 {
     student *i;
     for(i= corp.head; i!=NULL; i=i->next)
+    {
+        printf("%s, %s", i->resgitration, i->name);
+        printf(", %i/%i/%i", i->birth.day, i->birth.moth, i->birth.year);
+        printf(", %.2f\n", i->average);
+    }
+}
+
+void print_student_end(body corp) //Imprime os estudantes na lista 
+{
+    student *i;
+    for(i= corp.taill; i!=NULL; i=i->previous)
     {
         printf("%s, %s", i->resgitration, i->name);
         printf(", %i/%i/%i", i->birth.day, i->birth.moth, i->birth.year);
@@ -118,15 +129,18 @@ int main()
     int op=1;
     while (op!=0)
     {
-        printf("\n\t**********MENU**********\n\t[1] -- CADASTRO\n\t[2] -- VISUALIZAR CADASTRO\n");
+        printf("\n\t**********MENU**********\n\t[1] -- CADASTRO\n\t[2] -- EXCLUIR ALUNO\n\t[3] -- VISUALIZAR CADASTRO DO PRIMEIRO\n\t[4] -- VISUALIZAR CADASTRO DO ULTIMO\n");
         scanf("%d", &op);
         switch (op)
         {
             case 1:
-                aux = lugar_elemento(aux);
+                aux = lugar_elemento(aux); //Cria o elemento na lista e insere na ordem;
                 break;
-            case 2:
-                print_student(aux);
+            case 3:
+                print_student_first(aux); //Imprime na ordem o estudante a partir do primeiro
+                break;
+            case 4:
+                print_student_end(aux); //Imprime na ordem o estudante a partir do ultimo
                 break;
             default:
                 break;
