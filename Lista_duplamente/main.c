@@ -55,7 +55,7 @@ body lugar_elemento(body list) //Enserir um elemento na lista fazer a busca e en
     body corp = list;
     char reg[TAM_REG];
     int confere;
-    scanf("%s", &reg);
+    scanf("%s", reg);
     people = cria_aluno(people);
     if(corp.head == NULL) //Se head for null não tem nenhum elemento na lista
     {
@@ -104,12 +104,46 @@ int Vazio(body aux)
     else return 0;
 }
 
-void excluir(body aux)
+body excluir(body aux)
 {
     if(Vazio(aux))
     {
         printf("Lista vazia!");
-        return;
+        return aux;
+    }
+    else
+    {
+        student *i, *prev, *nex;
+        char reg[TAM_REG];
+        scanf("%s", reg);
+        for(i= aux.head; i!=NULL; i=i->next)
+        {
+            if(strcmp(i->resgitration, reg) == 0)
+            {
+                if(i == aux.head)
+                {
+                    aux.head = i->next;
+                    aux.head->previous = NULL;
+                    break;
+                }
+                else if(i == aux.taill)
+                {
+                    aux.taill = i->previous;
+                    aux.taill->next = NULL;
+                    break;
+                }
+                else
+                {
+                    prev = i->previous;
+                    prev->next = i->next;
+                    prev->previous = i->previous;
+                    break;
+                }
+                
+            }
+        }
+        free(i);
+        return aux;
     } 
 }
 
@@ -161,7 +195,7 @@ int main()
                 aux = lugar_elemento(aux); //Cria o elemento na lista e insere na ordem;
                 break;
             case 2:
-                excluir(aux);
+                aux = excluir(aux);
                 break;
             case 3:
                 print_student_first(aux); //Imprime na ordem o estudante a partir do primeiro
