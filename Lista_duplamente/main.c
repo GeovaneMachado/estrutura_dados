@@ -21,7 +21,7 @@ typedef struct //struct da ficha do aluno
     struct student *previous; // proximo aluno
 }student;
 
-typedef struct
+typedef struct //Cria struct para apontar o primeiro e ultimo da lista
 {
     student *head;
     student *taill;
@@ -104,54 +104,76 @@ int Vazio(body aux)
     else return 0;
 }
 
-body excluir(body aux)
+body excluir(body aux) //Exclui um elemento especifico da lista
 {
-    if(Vazio(aux))
+    if(Vazio(aux)) // verifica se a lista esta Vazia
     {
-        printf("Lista vazia!");
+        printf("Lista Vazia!"); 
         return aux;
     }
-    else
+    else 
     {
         student *i, *prev, *nex;
         char reg[TAM_REG];
-        scanf("%s", reg);
+        scanf("%s", reg); //Le a matricula que tem que excluir
         for(i= aux.head; i!=NULL; i=i->next)
         {
             if(strcmp(i->resgitration, reg) == 0)
             {
-                if(i == aux.head)
+                if(i == aux.head) //Se o primeiro elemento for igual a i;
                 {
-                    aux.head = i->next;
-                    aux.head->previous = NULL;
-                    break;
+                    if(aux.head->next == NULL) //Se o head for o unico elemento na lista 
+                    {
+                        aux.head = NULL;
+                        aux.taill = NULL;
+                    }
+                    else
+                    {                        
+                        aux.head = i->next;
+                        aux.head->previous = NULL;
+                    }
+                    free(i);
+                    continue;
                 }
-                else if(i == aux.taill)
+                else if(i == aux.taill) //Se o ultimo elemento for igual a i;
                 {
                     aux.taill = i->previous;
                     aux.taill->next = NULL;
-                    break;
+                    free(i);
+                    continue;
                 }
                 else
                 {
-                    prev = i->previous;
+                    prev = i->previous; //Se algum elemento do meio da lista for igual a i;
                     prev->next = i->next;
                     prev->previous = i->previous;
-                    break;
-                }
-                
+                    free(i);
+                    continue;
+                }                
             }
         }
-        free(i);
         return aux;
     } 
+}
+void free_memory(body corp) //Libera o espaço na memoria 
+{
+    student *aux = corp.head->next, *i;
+    if(Vazio(corp)) return;
+    for(i= corp.head; i!=NULL; i=i->next)
+    {
+        printf("*");
+        free(i);
+        i = aux;
+        aux = aux->next;
+    }
+    printf("*");
 }
 
 void print_student_first(body corp) //Imprime os estudantes na lista 
 {
     if(Vazio(corp))
     {
-        printf("Lista vazia!");
+        printf("Lista Vazia!");
         return;
     } 
     student *i;
@@ -167,7 +189,7 @@ void print_student_end(body corp) //Imprime os estudantes na lista
 {
     if(Vazio(corp))
     {
-        printf("Lista vazia!");
+        printf("Lista Vazia!");
         return;
     } 
     student *i;
@@ -206,6 +228,7 @@ int main()
             default:
                 break;
         }   
-    }    
+    }
+    free_memory(aux); 
     return 0;
 }
