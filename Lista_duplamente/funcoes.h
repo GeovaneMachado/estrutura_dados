@@ -12,12 +12,21 @@ typedef struct //struct da data de nascimento do aluno
 
 typedef struct //struct da ficha do aluno
 {
-    char resgitration[TAM_REG]; //matricula
-    char name[TAM_NAME];//nome
-    Date birth;//nascimento
-    float average;//media das notas
-    struct student *next, *previous; // proximo aluno
+    char resgitration[TAM_REG];     //matricula
+    char name[TAM_NAME];    //nome
+    Date birth; //nascimento
+    float average;  //media das notas
+    struct student *next;
+    struct student *previous; // proximo aluno
 }student;
+
+typedef struct
+{
+    student *head;
+    student *taill;
+}body;
+
+
 /*
 typedef struct 
 {
@@ -67,7 +76,7 @@ body *cria_aluno(student *people)
     }
     return list_people;
 }
-*/
+*//*
 void Void(student *people)
 {
     if(people == NULL) return 1;
@@ -89,3 +98,4 @@ void print_Student(student *people) //Emprime os estudantes cadastrados
     }
 }
 
+*/
