@@ -158,7 +158,8 @@ void free_memory(body corp) //Libera o espaço na memoria
         i = aux;
         aux = aux->next;
     }
-    printf("*");
+    printf("*\n");
+    aux = NULL;
 }
 
 void print_student_first(body corp) //Imprime os estudantes na lista 
