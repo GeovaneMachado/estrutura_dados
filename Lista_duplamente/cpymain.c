@@ -105,12 +105,14 @@ body excluir(body aux) //Exclui um elemento especifico da lista
     }
     else 
     {
-        student *i, *prev, *nex;
+        student *i, *prev;
+        int confere = 1;
         char reg[TAM_REG];
         scanf("%s", reg); //Le a matricula que tem que excluir
         for(i= aux.head; i!=NULL; i=i->next)
         {
-            if(strcmp(i->resgitration, reg) == 0)
+            confere = strcmp(i->resgitration, reg);
+            if(confere == 0)
             {
                 if(i == aux.head) //Se o primeiro elemento for igual a i;
                 {
@@ -132,7 +134,7 @@ body excluir(body aux) //Exclui um elemento especifico da lista
                     aux.taill = i->previous;
                     aux.taill->next = NULL;
                     free(i);
-                    continue;
+                    break;
                 }
                 else
                 {
@@ -147,19 +149,26 @@ body excluir(body aux) //Exclui um elemento especifico da lista
         return aux;
     } 
 }
+
 void free_memory(body corp) //Libera o espaço na memoria 
 {
-    student *aux = corp.head->next, *i;
-    if(Vazio(corp)) return;
-    for(i= corp.head; i!=NULL; i=i->next)
+    student *aux = corp.head, *i;
+    if(Vazio(corp)) return ;
+    if(aux->next == NULL)
     {
         printf("*");
-        free(i);
-        i = aux;
-        aux = aux->next;
+        free(aux);
     }
-    printf("*\n");
-    aux = NULL;
+    else
+    {
+        for(i= corp.head->next; i!=NULL; i=i->next)
+        {
+            printf("*");   
+            free(aux);
+            aux = i;
+        }
+    }
+    printf("\n");
 }
 
 void print_student_first(body corp) //Imprime os estudantes na lista 
