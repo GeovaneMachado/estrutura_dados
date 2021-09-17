@@ -100,7 +100,7 @@ body excluir(body aux) //Exclui um elemento especifico da lista
 {
     if(Vazio(aux)) // verifica se a lista esta Vazia
     {
-        printf("Lista Vazia!"); 
+        printf("Lista Vazia!\n"); 
         return aux;
     }
     else 
@@ -154,18 +154,18 @@ void free_memory(body corp) //Libera o espaço na memoria
 {
     student *aux = corp.head, *i;
     if(Vazio(corp)) return ;
+    for(i=corp.head; i!=NULL; i = i->next) printf("*");
+    printf("\n");
     if(aux->next == NULL)
     {
-        printf("*");
         free(aux);
     }
     else
     {
         for(i= corp.head->next; i!=NULL; i=i->next)
         {
-            printf("*");   
             free(aux);
-            aux = i;
+            aux = i;   
         }
     }
     printf("\n");
@@ -175,7 +175,7 @@ void print_student_first(body corp) //Imprime os estudantes na lista
 {
     if(Vazio(corp))
     {
-        printf("Lista Vazia!");
+        printf("Lista Vazia!\n");
         return;
     } 
     student *i;
@@ -191,7 +191,7 @@ void print_student_end(body corp) //Imprime os estudantes na lista
 {
     if(Vazio(corp))
     {
-        printf("Lista Vazia!");
+        printf("Lista Vazia!\n");
         return;
     } 
     student *i;
