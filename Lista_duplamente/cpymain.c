@@ -98,6 +98,8 @@ int Vazio(body aux)
 
 body excluir(body aux) //Exclui um elemento especifico da lista
 {
+    char reg[TAM_REG];
+    scanf("%s", reg); //Le a matricula que tem que excluir
     if(Vazio(aux)) // verifica se a lista esta Vazia
     {
         printf("Lista Vazia!\n"); 
@@ -107,8 +109,6 @@ body excluir(body aux) //Exclui um elemento especifico da lista
     {
         student *i, *prev;
         int confere = 1;
-        char reg[TAM_REG];
-        scanf("%s", reg); //Le a matricula que tem que excluir
         for(i= aux.head; i!=NULL; i=i->next)
         {
             confere = strcmp(i->resgitration, reg);
