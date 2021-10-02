@@ -79,16 +79,17 @@ void free_memory(body corp) //Libera o espaço na memoria
     }
     else
     {
-           url *aux, *i;
-        aux = corp.head->next;
-        i = corp.head;
+        url *aux, *i;
+        aux = corp.taill->previous;
+        i = corp.taill;
         while(i!=NULL)
         {
             printf("@");
             free(i);
             i = aux;
-            aux = aux->next;
+            aux = aux->previous;
         }
+        aux = NULL;
     }
     printf("@\n");
 }
